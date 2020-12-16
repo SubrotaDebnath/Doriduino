@@ -8,9 +8,11 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class Helper {
     private Context context;
+    ProgressDialog pd ;
 
     public Helper(Context context) {
         this.context = context;
+        pd = new ProgressDialog(context);
     }
 
     public static void showSnackBar(View v, String message) {
@@ -20,9 +22,12 @@ public class Helper {
     }
 
     public void progressShow(String message){
-        ProgressDialog pd = new ProgressDialog(context);
         pd.setMessage(message);
         pd.show();
+    }
+
+    public void progressDismiss(){
+        pd.dismiss();
     }
 
 }

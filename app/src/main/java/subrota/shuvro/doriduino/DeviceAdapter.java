@@ -21,12 +21,13 @@ import java.util.Set;
 public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder>{
     private Context context;
     private List<Object> deviceList;
-    private  DeviceListDataSet deviceListDataSet;
+    private List<DeviceListDataSet> deviceListDataSets;
+    //private  DeviceListDataSet deviceListDataSet;
     private static final String TAG = "DeviceAdapter";
 
-    public DeviceAdapter(Context context, List<Object> deviceList) {
+    public DeviceAdapter(Context context, List<DeviceListDataSet> deviceListDataSets) {
         this.context = context;
-        this.deviceList = deviceList;
+        this.deviceListDataSets = deviceListDataSets;
     }
 
     @NonNull
@@ -38,17 +39,18 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        deviceListDataSet = (DeviceListDataSet) deviceList.get(position);
-        holder.name.setText(deviceListDataSet.getName());
-        holder.id.setText(deviceListDataSet.getAddress());
-        Log.i(TAG, "Name: "+ deviceListDataSet.getName()+ "   Address: "+ deviceListDataSet.getAddress());
+        //deviceListDataSet = (DeviceListDataSet) deviceList.get(position);
+        holder.name.setText(deviceListDataSets.get(position).getName());
+        holder.id.setText(deviceListDataSets.get(position).getAddress());
+        Log.i(TAG, "Name: "+ deviceListDataSets.get(position).getName()+ "   Address: "+ deviceListDataSets.get(position).getAddress());
 
         holder.deviceRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,MainActivity.class);
-                intent.putExtra("name", deviceListDataSet.getName());
-                intent.putExtra("address",deviceListDataSet.getAddress());
+                intent.putExtra("name", deviceListDataSets.get(position).getName());
+                intent.putExtra("address",deviceListDataSets.get(position).getAddress());
+                Log.i(TAG, "Name Send: "+ deviceListDataSets.get(position).getName()+ "   Address Send: "+ deviceListDataSets.get(position).getAddress());
                 context.startActivity(intent);
             }
         });
@@ -56,7 +58,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return deviceList.size();
+        return deviceListDataSets.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

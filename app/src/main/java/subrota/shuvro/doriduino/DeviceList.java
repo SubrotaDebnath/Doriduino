@@ -20,6 +20,7 @@ public class DeviceList extends AppCompatActivity {
     BluetoothAdapter bluetoothAdapter;
     Set<BluetoothDevice> pairedDevices ;
     List<Object> deviceList = new ArrayList<>();
+    List<DeviceListDataSet> deviceListDataSets = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +34,11 @@ public class DeviceList extends AppCompatActivity {
                 String deviceName = device.getName();
                 String deviceAddress = device.getAddress(); // MAC address
                 DeviceListDataSet deviceInfoModel = new DeviceListDataSet(deviceName,deviceAddress);
-                deviceList.add(deviceInfoModel);
+                deviceListDataSets.add(deviceInfoModel);
             }
             RecyclerView recyclerView = findViewById(R.id.paired_devices);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            DeviceAdapter deviceListAdapter = new DeviceAdapter(this,deviceList);
+            DeviceAdapter deviceListAdapter = new DeviceAdapter(this,deviceListDataSets);
             recyclerView.setAdapter(deviceListAdapter);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
         } else {

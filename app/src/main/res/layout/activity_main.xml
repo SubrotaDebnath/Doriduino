@@ -28,6 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:maxLines="1"
+            android:layout_marginStart="20dp"
             android:padding="20dp"
             android:text="connect"
             android:textColor="@color/black"
@@ -50,16 +51,36 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
-                android:padding="3dp"
-                android:text="Message"
-                android:textColor="@color/black"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="3dp"
+                    android:text="Message"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/textCountTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:padding="3dp"
+                    android:gravity="right"
+                    android:text="0/900"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/controlBoardMessage"
@@ -77,6 +98,7 @@
                 android:scrollbars="vertical"
                 android:scrollHorizontally="false"
                 android:textColor="@color/black"
+                android:maxLength="900"
                 android:textSize="14dp" />
 
             <LinearLayout
@@ -97,6 +119,7 @@
                     android:textStyle="bold" />
 
                 <Spinner
+                    android:id="@+id/SpeedSpinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -130,11 +153,11 @@
                 android:orientation="vertical">
 
                 <Button
+                    android:id="@+id/sendBTN"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_shap"
                     android:gravity="center"
-                    android:onClick="send"
                     android:padding="5dp"
                     android:text="Send"
                     android:textColor="@color/white"
