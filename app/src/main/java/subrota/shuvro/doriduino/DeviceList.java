@@ -37,11 +37,11 @@ public class DeviceList extends AppCompatActivity {
             }
             RecyclerView recyclerView = findViewById(R.id.paired_devices);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            DeviceListAdapter deviceListAdapter = new DeviceListAdapter(this,deviceList);
+            DeviceAdapter deviceListAdapter = new DeviceAdapter(this,deviceList);
             recyclerView.setAdapter(deviceListAdapter);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
         } else {
-            View view = findViewById(R.id.recyclerViewDevice);
+            View view = findViewById(R.id.paired_devices);
             Snackbar snackbar = Snackbar.make(view, "Activate Bluetooth or pair a Bluetooth device", Snackbar.LENGTH_INDEFINITE);
             snackbar.setAction("OK", new View.OnClickListener() {
                 @Override

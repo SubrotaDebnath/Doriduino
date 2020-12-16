@@ -3,6 +3,7 @@ package subrota.shuvro.doriduino;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +19,14 @@ import java.util.List;
 import java.util.Set;
 
 public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder>{
-    private List<DeviceInfoDataSet> devices = new ArrayList<>();
-    private  Set<BluetoothDevice> pairedDevices;
     private Context context;
+    private List<Object> deviceList;
+    private  DeviceListDataSet deviceListDataSet;
+    private static final String TAG = "DeviceAdapter";
 
-    public DeviceAdapter(Context context, List<DeviceInfoDataSet> devices, Set<BluetoothDevice> pairedDevices) {
-        this.devices = devices;
+    public DeviceAdapter(Context context, List<Object> deviceList) {
         this.context = context;
-        this.pairedDevices = pairedDevices;
+        this.deviceList = deviceList;
     }
 
     @NonNull
@@ -37,16 +38,18 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.name.setText(devices.get(position).getName());
-        holder.id.setText(devices.get(position).getId());
+        deviceListDataSet = (DeviceListDataSet) deviceList.get(position);
+        holder.name.setText(deviceListDataSet.getName());
+        holder.id.setText(deviceListDataSet.getAddress());
+        Log.i(TAG, "Name: "+ deviceListDataSet.getName()+ "   Address: "+ deviceListDataSet.getAddress());
+
         holder.deviceRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ControlBoard.class);
-                intent.putExtra("id", devices.get(position).getId());
-                intent.putExtra("name", devices.get(position).getName());
-                intent.putExtra("devices", (Serializable) pairedDevices);
-                //ContextCompat.startActivity(intent);
+                Intent intent = new Intent(context,MainActivity.class);
+                intent.putExtra("name", deviceListDataSet.getName());
+                intent.putExtra("address",deviceListDataSet.getAddress());
+                context.startActivity(intent);
 
             }
         });
@@ -54,7 +57,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return devices.size();
+        return deviceList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
