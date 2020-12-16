@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Doriduino">
         <activity android:name=".DeviceList"></activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
