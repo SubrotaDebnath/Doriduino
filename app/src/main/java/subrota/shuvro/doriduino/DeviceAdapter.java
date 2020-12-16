@@ -50,7 +50,6 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
                 intent.putExtra("name", deviceListDataSet.getName());
                 intent.putExtra("address",deviceListDataSet.getAddress());
                 context.startActivity(intent);
-
             }
         });
     }
