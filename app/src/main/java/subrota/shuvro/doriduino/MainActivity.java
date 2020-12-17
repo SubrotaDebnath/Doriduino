@@ -2,9 +2,11 @@ package subrota.shuvro.doriduino;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +15,7 @@ import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,8 +23,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView title;
     private TextView textCountTV;
     private Button sendBTN;
+    private Button infoBTN;
     private EditText messageET;
     private Spinner speedSpinner;
     private CheckBox checkBox;
@@ -63,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         connectBTN = findViewById(R.id.connectBTN);
         title = findViewById(R.id.controlBoardTitle);
         sendBTN = findViewById(R.id.sendBTN);
+        infoBTN = findViewById(R.id.infoBTN);
         messageET = findViewById(R.id.controlBoardMessage);
         speedSpinner = findViewById(R.id.SpeedSpinner);
         checkBox = findViewById(R.id.controlBoardCB);
@@ -234,6 +241,28 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, "Full Send String: \""+ fullText+"\"");
 
             }
+        });
+
+        infoBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setIcon(R.drawable.ic_baseline_info_24);
+                builder.setTitle("Application Information");
+
+                LayoutInflater inflater = LayoutInflater.from(v.getContext());
+                LinearLayout root = (LinearLayout) inflater.inflate(R.layout.info_page, null);
+
+
+                builder.setView(root);
+                builder.setCancelable(false);
+
+                builder.setPositiveButton("Close", null);
+
+               // builder.setNegativeButton("Cancel",null);
+                builder.show();
+            }
+
         });
     }
 
