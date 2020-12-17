@@ -22,7 +22,6 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
     private Context context;
     private List<Object> deviceList;
     private List<DeviceListDataSet> deviceListDataSets;
-    //private  DeviceListDataSet deviceListDataSet;
     private static final String TAG = "DeviceAdapter";
 
     public DeviceAdapter(Context context, List<DeviceListDataSet> deviceListDataSets) {
@@ -39,10 +38,9 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //deviceListDataSet = (DeviceListDataSet) deviceList.get(position);
         holder.name.setText(deviceListDataSets.get(position).getName());
         holder.id.setText(deviceListDataSets.get(position).getAddress());
-        Log.i(TAG, "Name: "+ deviceListDataSets.get(position).getName()+ "   Address: "+ deviceListDataSets.get(position).getAddress());
+        //Log.i(TAG, "Name: "+ deviceListDataSets.get(position).getName()+ "   Address: "+ deviceListDataSets.get(position).getAddress());
 
         holder.deviceRow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +48,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
                 Intent intent = new Intent(context,MainActivity.class);
                 intent.putExtra("name", deviceListDataSets.get(position).getName());
                 intent.putExtra("address",deviceListDataSets.get(position).getAddress());
-                Log.i(TAG, "Name Send: "+ deviceListDataSets.get(position).getName()+ "   Address Send: "+ deviceListDataSets.get(position).getAddress());
+                //Log.i(TAG, "Name Send: "+ deviceListDataSets.get(position).getName()+ "   Address Send: "+ deviceListDataSets.get(position).getAddress());
                 context.startActivity(intent);
             }
         });
