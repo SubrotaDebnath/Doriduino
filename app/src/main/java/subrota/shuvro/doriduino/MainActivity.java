@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     public CreateConnectThread createConnectThread;
     public static BluetoothSocket mmSocket;
     public static Handler handler;
+    private static final int REQUEST_ENABLE_BT = 1;
     private final static int CONNECTING_STATUS = 1;
     private final static int MESSAGE_READ = 2;
     private static final String[] speedText = {"Default", "1X", "2X", "3X", "4X", "5X", "6X", "7X", "8X", "9X", "10X"};
@@ -68,9 +69,11 @@ public class MainActivity extends AppCompatActivity {
         textCountTV = findViewById(R.id.textCountTV);
         helper = new Helper(this);
         preferences = new SharedPreferences(this);
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
+        enableBluetooth();
 
         if (bundle != null){
             deviceAddress =(String) bundle.getString("address");
@@ -85,8 +88,10 @@ public class MainActivity extends AppCompatActivity {
             BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
             createConnectThread = new CreateConnectThread(bluetoothAdapter,deviceAddress);
             createConnectThread.start();
+        }
 
-
+        if (bluetoothAdapter == null) {
+            helper.showSnackBar(getWindow().getDecorView().getRootView(), "Device doesn't support Bluetooth");
         }
 
         handler = new Handler(Looper.getMainLooper()) {
@@ -366,6 +371,14 @@ public class MainActivity extends AppCompatActivity {
             try {
                 mmSocket.close();
             } catch (IOException e) { }
+        }
+    }
+
+
+    public void enableBluetooth() {
+        if (!bluetoothAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }
     }
 
