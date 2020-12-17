@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="5dp">
-
         <TextView
             android:id="@+id/controlBoardTitle"
             android:layout_width="match_parent"
@@ -37,7 +36,6 @@
             android:layout_gravity="end"
             android:gravity="end" />
     </androidx.cardview.widget.CardView>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,12 +43,10 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="-72dp">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -79,7 +75,6 @@
                     android:text="0/900"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
-
             </LinearLayout>
 
             <EditText
@@ -100,12 +95,10 @@
                 android:textColor="@color/black"
                 android:maxLength="900"
                 android:textSize="14dp" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -117,7 +110,6 @@
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     android:textStyle="bold" />
-
                 <Spinner
                     android:id="@+id/SpeedSpinner"
                     android:layout_width="wrap_content"
@@ -129,10 +121,7 @@
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     android:textStyle="bold" />
-
             </LinearLayout>
-
-
             <CheckBox
                 android:id="@+id/controlBoardCB"
                 android:layout_width="match_parent"
@@ -142,7 +131,6 @@
                 android:textColor="@color/black"
                 android:textSize="16dp"
                 android:textStyle="normal" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -151,7 +139,6 @@
                 android:layout_marginBottom="30dp"
                 android:gravity="center"
                 android:orientation="vertical">
-
                 <Button
                     android:id="@+id/sendBTN"
                     android:layout_width="wrap_content"
@@ -163,11 +150,20 @@
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     android:textStyle="bold" />
+                <Button
+                    android:id="@+id/infoBTN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_shap"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="info"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="40dp"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
             </LinearLayout>
-
         </LinearLayout>
-
     </ScrollView>
-
-
 </LinearLayout>
