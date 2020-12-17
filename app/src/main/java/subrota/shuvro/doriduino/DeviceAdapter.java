@@ -20,7 +20,6 @@ import java.util.Set;
 
 public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder>{
     private Context context;
-    private List<Object> deviceList;
     private List<DeviceListDataSet> deviceListDataSets;
     private static final String TAG = "DeviceAdapter";
 
