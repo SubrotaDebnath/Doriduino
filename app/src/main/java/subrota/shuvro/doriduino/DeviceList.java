@@ -19,7 +19,6 @@ import java.util.Set;
 public class DeviceList extends AppCompatActivity {
     BluetoothAdapter bluetoothAdapter;
     Set<BluetoothDevice> pairedDevices ;
-    List<Object> deviceList = new ArrayList<>();
     List<DeviceListDataSet> deviceListDataSets = new ArrayList<>();
 
     @Override
@@ -32,7 +31,7 @@ public class DeviceList extends AppCompatActivity {
         if (pairedDevices.size() > 0) {
             for (BluetoothDevice device : pairedDevices) {
                 String deviceName = device.getName();
-                String deviceAddress = device.getAddress(); // MAC address
+                String deviceAddress = device.getAddress();
                 DeviceListDataSet deviceInfoModel = new DeviceListDataSet(deviceName,deviceAddress);
                 deviceListDataSets.add(deviceInfoModel);
             }
@@ -51,5 +50,4 @@ public class DeviceList extends AppCompatActivity {
             snackbar.show();
         }
     }
-
 }
