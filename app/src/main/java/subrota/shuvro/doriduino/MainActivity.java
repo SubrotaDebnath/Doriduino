@@ -259,7 +259,6 @@ public class MainActivity extends AppCompatActivity {
 
                 builder.setPositiveButton("Close", null);
 
-               // builder.setNegativeButton("Cancel",null);
                 builder.show();
             }
 
