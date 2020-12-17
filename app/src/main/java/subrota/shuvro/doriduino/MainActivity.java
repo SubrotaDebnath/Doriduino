@@ -86,9 +86,7 @@ public class MainActivity extends AppCompatActivity {
             deviceAddress =(String) bundle.getString("address");
             deviceName =(String) bundle.getString("name");
             title.setText(deviceName+" Connecting...");
-
-            Log.i(TAG, "Name: "+deviceName+"   Address: "+deviceAddress);
-
+            //Log.i(TAG, "Name: "+deviceName+"   Address: "+deviceAddress);
             helper.progressShow("Connecting with "+deviceName);
             connectBTN.setEnabled(false);
 
@@ -108,19 +106,14 @@ public class MainActivity extends AppCompatActivity {
                     case CONNECTING_STATUS:
                         switch(msg.arg1){
                             case 1:
-                                //toolbar.setSubtitle("Connected to " + deviceName);
                                 title.setText(deviceName+" Connected");
                                 helper.progressDismiss();
                                 connectBTN.setEnabled(true);
-                                //buttonConnect.setEnabled(true);
-                                //sendBTN.setEnabled(true);
                                 break;
                             case -1:
                                 title.setText(deviceName+" fails to connect");
                                 helper.progressDismiss();
-                                //progressBar.setVisibility(View.GONE);
                                 connectBTN.setEnabled(true);
-                                //sendBTN.setEnabled(false);
                                 break;
                         }
                         break;
@@ -129,10 +122,8 @@ public class MainActivity extends AppCompatActivity {
                         String arduinoMsg = msg.obj.toString();
                         switch (arduinoMsg.toLowerCase()){
                             case "led is turned on":
-                                //textViewInfo.setText("Arduino Message : " + arduinoMsg);
                                 break;
                             case "led is turned off":
-                                //textViewInfo.setText("Arduino Message : " + arduinoMsg);
                                 break;
                         }
                         break;
@@ -148,8 +139,8 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 speed = parent.getItemAtPosition(position);
                 preferences.setSpeed(position);
-                Log.i(TAG, "position Text: "+ speed.toString());
-                Log.i(TAG, "position: "+ position);
+                //Log.i(TAG, "position Text: "+ speed.toString());
+                //Log.i(TAG, "position: "+ position);
             }
 
             @Override
@@ -165,7 +156,6 @@ public class MainActivity extends AppCompatActivity {
         }else {
             speedSpinner.setSelection(preferences.getSpeed());
         }
-
 
         /*=============================== Checkbox operation ==============================*/
         preferences = new SharedPreferences(this);
@@ -227,19 +217,16 @@ public class MainActivity extends AppCompatActivity {
                     }
                     try {
                         connectedThread.write(fullText);
-                        Log.i(TAG, "Full Send String 1: \""+ fullText+"\"");
+                        //Log.i(TAG, "Full Send String 1: \""+ fullText+"\"");
                         helper.showSnackBar(v, "Message sent to "+deviceName);
                     }catch (Exception e){
-                        Log.i(TAG, "Connection Thread Error: "+ e.getMessage());
+                        //Log.i(TAG, "Connection Thread Error: "+ e.getMessage());
                         helper.showSnackBar(v, "Device is disconnected");
                     }
-
-
                 }else {
                     messageET.setError("No message");
                 }
-                Log.i(TAG, "Full Send String: \""+ fullText+"\"");
-
+               // Log.i(TAG, "Full Send String: \""+ fullText+"\"");
             }
         });
 
@@ -249,19 +236,13 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
                 builder.setIcon(R.drawable.ic_baseline_info_24);
                 builder.setTitle("Application Information");
-
                 LayoutInflater inflater = LayoutInflater.from(v.getContext());
                 LinearLayout root = (LinearLayout) inflater.inflate(R.layout.info_page, null);
-
-
                 builder.setView(root);
                 builder.setCancelable(false);
-
                 builder.setPositiveButton("Close", null);
-
                 builder.show();
             }
-
         });
     }
 
@@ -271,63 +252,43 @@ public class MainActivity extends AppCompatActivity {
     public static class CreateConnectThread extends Thread {
 
         public CreateConnectThread(BluetoothAdapter bluetoothAdapter, String address) {
-            /*
-            Use a temporary object that is later assigned to mmSocket
-            because mmSocket is final.
-             */
             BluetoothDevice bluetoothDevice = bluetoothAdapter.getRemoteDevice(address);
             BluetoothSocket tmp = null;
             UUID uuid = bluetoothDevice.getUuids()[0].getUuid();
 
             try {
-                /*
-                Get a BluetoothSocket to connect with the given BluetoothDevice.
-                Due to Android device varieties,the method below may not work fo different devices.
-                You should try using other methods i.e. :
-                tmp = device.createRfcommSocketToServiceRecord(MY_UUID);
-                 */
                 tmp = bluetoothDevice.createInsecureRfcommSocketToServiceRecord(uuid);
-
             } catch (IOException e) {
-                Log.i(TAG, "Socket's create() method failed", e);
+                //Log.i(TAG, "Socket's create() method failed", e);
             }
             mmSocket = tmp;
         }
 
         public void run() {
-            // Cancel discovery because it otherwise slows down the connection.
             BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
             bluetoothAdapter.cancelDiscovery();
             try {
-                // Connect to the remote device through the socket. This call blocks
-                // until it succeeds or throws an exception.
                 mmSocket.connect();
-                Log.i("Status", "Device connected");
+                //Log.i("Status", "Device connected");
                 handler.obtainMessage(CONNECTING_STATUS, 1, -1).sendToTarget();
             } catch (IOException connectException) {
-                // Unable to connect; close the socket and return.
                 try {
                     mmSocket.close();
-                    Log.i("Status", "Cannot connect to device");
+                    //Log.i("Status", "Cannot connect to device");
                     handler.obtainMessage(CONNECTING_STATUS, -1, -1).sendToTarget();
                 } catch (IOException closeException) {
-                    Log.i(TAG, "Could not close the client socket", closeException);
+                    //Log.i(TAG, "Could not close the client socket", closeException);
                 }
                 return;
             }
-
-            // The connection attempt succeeded. Perform work associated with
-            // the connection in a separate thread.
             connectedThread = new ConnectedThread(mmSocket);
             connectedThread.run();
         }
-
-        // Closes the client socket and causes the thread to finish.
         public void cancel() {
             try {
                 mmSocket.close();
             } catch (IOException e) {
-                Log.i(TAG, "Could not close the client socket", e);
+                //Log.i(TAG, "Could not close the client socket", e);
             }
         }
     }
@@ -342,9 +303,6 @@ public class MainActivity extends AppCompatActivity {
             mmSocket = socket;
             InputStream tmpIn = null;
             OutputStream tmpOut = null;
-
-            // Get the input and output streams, using temp objects because
-            // member streams are final
             try {
                 tmpIn = socket.getInputStream();
                 tmpOut = socket.getOutputStream();
@@ -355,20 +313,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public void run() {
-            byte[] buffer = new byte[1024];  // buffer store for the stream
-            int bytes = 0; // bytes returned from read()
-            // Keep listening to the InputStream until an exception occurs
+            byte[] buffer = new byte[1024];
+            int bytes = 0;
             while (true) {
                 try {
-                    /*
-                    Read from the InputStream from Arduino until termination character is reached.
-                    Then send the whole String message to GUI Handler.
-                     */
                     buffer[bytes] = (byte) mmInStream.read();
                     String readMessage;
                     if (buffer[bytes] == '\n'){
                         readMessage = new String(buffer,0,bytes);
-                        Log.i("Arduino Message",readMessage);
+                        //Log.i("Arduino Message",readMessage);
                         handler.obtainMessage(MESSAGE_READ,readMessage).sendToTarget();
                         bytes = 0;
                     } else {
@@ -381,16 +334,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        /* Call this from the main activity to send data to the remote device */
         public void write(String input) {
-            Log.i(TAG, "String Length: " + input.length());
+            //Log.i(TAG, "String Length: " + input.length());
             byte[] bytes = input.getBytes(); //converts entered String into bytes
             try {
                 mmOutStream.write(bytes);
-                Log.i(TAG, "byte Length: " + bytes.length);
-
+                //Log.i(TAG, "byte Length: " + bytes.length);
             } catch (IOException e) {
-                Log.i("Send Error","Unable to send message",e);
+               // Log.i("Send Error","Unable to send message",e);
             }
         }
 
@@ -402,14 +353,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     public void enableBluetooth() {
         if (!bluetoothAdapter.isEnabled()) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }
     }
-
-
 
 }
