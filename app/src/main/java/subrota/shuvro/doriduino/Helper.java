@@ -8,7 +8,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class Helper {
     private Context context;
-    ProgressDialog pd ;
+    private ProgressDialog pd ;
 
     public Helper(Context context) {
         this.context = context;
