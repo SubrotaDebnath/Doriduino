@@ -1,6 +1,7 @@
 package subrota.shuvro.doriduino;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
