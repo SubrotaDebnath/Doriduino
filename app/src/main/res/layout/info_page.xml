@@ -15,7 +15,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="This application is ideal for send text to bluetooth module (ex. HC-05, HC-06 etc). At first we have to pair target devices from system otherwise we can not get our target devices in pair list inside app.\nwe hop it will be enjoyable.\nThanks.\n"
+                android:text="This application is ideal for send text to bluetooth module (ex. HC-05, HC-06 etc). At first we have to pair target devices from system otherwise we can not get our target devices in pair list inside app.\nwe hop it will be enjoyable.\nThanks.\n [NB: Please don't input &quot; &lt; &quot;,  &quot; &gt;  &quot; and  &quot; ;  &quot;]"
                 android:textSize="14dp"
                 android:textColor="@color/black"
                 android:textStyle="normal"

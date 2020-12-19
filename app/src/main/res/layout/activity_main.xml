@@ -30,7 +30,7 @@
             android:layout_marginStart="20dp"
             android:padding="20dp"
             android:text="connect"
-            android:textColor="@color/black"
+            android:textColor="?attr/colorAccent"
             android:textSize="18dp"
             android:textStyle="bold"
             android:layout_gravity="end"
@@ -77,6 +77,17 @@
                     android:textSize="14dp" />
             </LinearLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:layout_marginTop="20dp"
+                android:text="[NB: Please don't input &quot; &lt; &quot;,  &quot; &gt;  &quot; and  &quot; ;  &quot;]"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="12dp"
+                android:gravity="center"
+                android:textStyle="normal" />
+
             <EditText
                 android:id="@+id/controlBoardMessage"
                 android:layout_width="match_parent"
@@ -120,6 +131,8 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="18dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
                     android:background="@android:color/holo_orange_dark"
                     android:textStyle="bold" />
             </LinearLayout>

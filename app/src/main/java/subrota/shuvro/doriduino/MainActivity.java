@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox checkBox;
     private String deviceName;
     private String deviceAddress;
-    private Object speed;
+    private String speed;
     private Helper helper;
     public BluetoothAdapter bluetoothAdapter;
     public static ConnectedThread connectedThread;
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_ENABLE_BT = 1;
     private final static int CONNECTING_STATUS = 1;
     private final static int MESSAGE_READ = 2;
-    private static final String[] speedText = {"Default", "1X", "2X", "3X", "4X", "5X", "6X", "7X", "8X", "9X", "10X"};
+    private static final String[] speedText = {"9X", "8X", "7X", "6X", "5X", "4X", "3X", "2X", "1X"};
     private static final String TAG = "MainActivity";
     private SharedPreferences preferences;
 
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         speedSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                speed = parent.getItemAtPosition(position);
+                speed = String.valueOf(position);
                 preferences.setSpeed(position);
                 //Log.i(TAG, "position Text: "+ speed.toString());
                 //Log.i(TAG, "position: "+ position);
@@ -211,9 +211,9 @@ public class MainActivity extends AppCompatActivity {
                 String fullText = null;
                 if (messageET.getText()!= null && !messageET.getText().equals("")){
                     if (checkBox.isChecked()){
-                        fullText = messageET.getText().toString()+";"+speed.toString()+";"+"1;";
+                        fullText = "<"+messageET.getText().toString()+" {Developed by ECRC};"+speed+">";
                     }else {
-                        fullText = messageET.getText().toString()+";"+speed.toString()+";"+"0;";
+                        fullText = "<"+messageET.getText().toString()+";"+speed+">";
                     }
                     try {
                         connectedThread.write(fullText);
