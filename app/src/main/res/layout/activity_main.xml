@@ -59,7 +59,7 @@
                     android:layout_marginTop="10dp"
                     android:padding="3dp"
                     android:text="Message:"
-                    android:textColor="@color/black"
+                    android:textColor="@android:color/holo_orange_dark"
                     android:textSize="18dp"
                     android:textStyle="bold" />
                 <TextView
@@ -93,6 +93,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="15dp"
                 android:background="#CBCFD1"
                 android:ellipsize="start"
                 android:gravity="top|left"
@@ -118,7 +122,7 @@
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text="Speed : "
-                    android:textColor="@color/black"
+                    android:textColor="@android:color/holo_orange_dark"
                     android:textSize="18dp"
                     android:textStyle="bold" />
                 <Spinner

@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -20,6 +22,7 @@ public class DeviceList extends AppCompatActivity {
     BluetoothAdapter bluetoothAdapter;
     Set<BluetoothDevice> pairedDevices ;
     List<DeviceListDataSet> deviceListDataSets = new ArrayList<>();
+    private ImageView backBTN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,14 @@ public class DeviceList extends AppCompatActivity {
         setContentView(R.layout.activity_device_list);
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         pairedDevices = bluetoothAdapter.getBondedDevices();
+        backBTN = findViewById(R.id.backBTN);
+
+        backBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DeviceList.this, MainActivity.class));
+            }
+        });
 
         if (pairedDevices.size() > 0) {
             for (BluetoothDevice device : pairedDevices) {
