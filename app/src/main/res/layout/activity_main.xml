@@ -59,7 +59,7 @@
                     android:layout_marginTop="10dp"
                     android:padding="3dp"
                     android:text="Message:"
-                    android:textColor="@android:color/holo_orange_dark"
+                    android:textColor="@color/black"
                     android:textSize="18dp"
                     android:textStyle="bold" />
                 <TextView
@@ -122,7 +122,7 @@
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text="Speed : "
-                    android:textColor="@android:color/holo_orange_dark"
+                    android:textColor="@color/black"
                     android:textSize="18dp"
                     android:textStyle="bold" />
                 <Spinner
